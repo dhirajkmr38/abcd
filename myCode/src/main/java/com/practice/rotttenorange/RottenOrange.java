@@ -6,7 +6,7 @@ import java.util.Queue;
 
 public class RottenOrange
 {
-    static Node getRottenNode( Node currentNode, int matrix[][], Direction direction )
+    static Node getRottenNode( Node currentNode, int matrix[][], Direction direction, int r, int c )
     {
         if ( currentNode == null || matrix == null ) {
             return null;
@@ -22,7 +22,7 @@ public class RottenOrange
             }
             //LookRight
             else if ( direction.getDirection().equals( "RIGHT" ) ) {
-                if ( currentNode.j < matrix.length - 1 && matrix[currentNode.i][currentNode.j + 1] == 1 ) {
+                if ( currentNode.j < c - 1 && matrix[currentNode.i][currentNode.j + 1] == 1 ) {
                     matrix[currentNode.i][currentNode.j + 1] = 2;
                     return new Node( currentNode.i, currentNode.j + 1 );
                 } else {
@@ -40,7 +40,7 @@ public class RottenOrange
             }
             //DOWN
             else if ( direction.getDirection().equals( "DOWN" ) ) {
-                if ( currentNode.i < matrix.length - 1 && matrix[currentNode.i + 1][currentNode.j] == 1 ) {
+                if ( currentNode.i < r - 1 && matrix[currentNode.i + 1][currentNode.j] == 1 ) {
                     matrix[currentNode.i + 1][currentNode.j] = 2;
                     return new Node( currentNode.i + 1, currentNode.j );
                 } else {
@@ -54,15 +54,16 @@ public class RottenOrange
     }
 
 
-    public static int calculateTimer( int matrix[][] )
+    public static int calculateTimer( int matrix[][], int r, int c )
     {
-        print( matrix );
+
+
         Queue<Node> processingQueue = new LinkedList<Node>();
         Queue<Node> dataHoldingQueue = new LinkedList<Node>();
 
 
-        for ( int i = 0; i < matrix.length; i++ ) {
-            for ( int j = 0; j < matrix.length; j++ ) {
+        for ( int i = 0; i < r; i++ ) {
+            for ( int j = 0; j < c; j++ ) {
                 if ( matrix[i][j] == 2 ) {
                     Node node = new Node( i, j );
                     processingQueue.add( node );
@@ -73,10 +74,10 @@ public class RottenOrange
         for ( timer = 0; processingQueue.size() != 0 || dataHoldingQueue.size() != 0; timer++ ) {
             while ( processingQueue.size() != 0 ) {
                 Node currrentNode = processingQueue.remove();
-                Node leftNode = getRottenNode( currrentNode, matrix, Direction.LEFT );
-                Node rightNode = getRottenNode( currrentNode, matrix, Direction.RIGHT );
-                Node upNode = getRottenNode( currrentNode, matrix, Direction.UP );
-                Node downNode = getRottenNode( currrentNode, matrix, Direction.DOWN );
+                Node leftNode = getRottenNode( currrentNode, matrix, Direction.LEFT, r, c );
+                Node rightNode = getRottenNode( currrentNode, matrix, Direction.RIGHT, r, c );
+                Node upNode = getRottenNode( currrentNode, matrix, Direction.UP, r, c );
+                Node downNode = getRottenNode( currrentNode, matrix, Direction.DOWN, r, c );
                 if ( leftNode != null ) {
                     dataHoldingQueue.add( leftNode );
                 }
@@ -93,7 +94,7 @@ public class RottenOrange
             Queue temp = processingQueue;
             processingQueue = dataHoldingQueue;
             dataHoldingQueue = temp;
-            print( matrix );
+
         }
 
         return timer;
@@ -101,26 +102,40 @@ public class RottenOrange
     }
 
 
-    static void print( int matrix[][] )
-    {
-        System.out.println( "\n" );
-        for ( int i = 0; i < matrix.length; i++ ) {
-            for ( int j = 0; j < matrix.length; j++ ) {
-                System.out.print( matrix[i][j] );
-            }
-            System.out.println();
-        }
-    }
 
 
     public static void main( String args[] )
     {
+        //        Scanner sc = new Scanner( System.in );
+        //        int to= sc.nextInt();
+        //        for(int test=0;test<to;test++) {
+        //            int r,c;
+        //            int matrix[][]= new int[50][50];
+        //            r=sc.nextInt();
+        //            c = sc.nextInt();
+        //            for(int i =0;i<r;i++){
+        //                for(int j =0;j<c;j++){
+        //                    matrix[i][j]=sc.nextInt();
+        //                }
+        //            }
+        int r = 3, c = 3;
         int matrix[][] = { { 1, 0, 1 }, { 0, 1, 0 }, { 1, 1, 2 } };
-        Queue<Node> queue = new LinkedList<Node>();
-
-        int time = calculateTimer( matrix );
-        System.out.println( "Timer is " + ( time - 1 ) );
-
-
+        //  Queue<Node> queue = new LinkedList<Node>();
+        boolean nonRottenFound = false;
+        int time = calculateTimer( matrix, r, c );
+        for ( int i = 0; i < r; i++ ) {
+            for ( int j = 0; j < c; j++ ) {
+                //                    if(matrix[i][j]==2){
+                //                        nonRottenFound=true;
+                //                    }
+                System.out.println( matrix[i][j] );
+            }
+        }
+        if ( nonRottenFound == true ) {
+            System.out.println( "-1" );
+        } else {
+            System.out.println( ( time - 1 ) );
+        }
     }
 }
+
