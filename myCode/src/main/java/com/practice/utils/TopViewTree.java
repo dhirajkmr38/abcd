@@ -9,44 +9,58 @@ import java.util.Map;
 public class TopViewTree
 {
 
-    Map<Integer, Node> map = new HashMap<Integer, Node>();
+    static Map<Integer, Node> map = new HashMap<Integer, Node>();
 
 
     public static void main( String args[] )
     {
         Node root = new Tree1().getRoot();
-
-        new TopViewTree().printTopView( root );
-
+        printTopView( root );
     }
 
 
-    public void printTopView( Node root )
+    public static void printTopView( Node root )
     {
         if ( root == null ) {
             return;
         } else {
-
-            print( root, 0 );
+            printLeft( root.left, -1 );
+            System.out.println( root.data );
+            printRight( root.right, 1 );
             map = new HashMap<Integer, Node>();
         }
-
-
     }
 
 
-    public void print( Node root, int width )
+    public static void printRight( Node root, int width )
     {
         if ( root == null ) {
             return;
         } else {
-            if ( map.containsKey( width ) == false ) {
+            if ( width > 0 && map.containsKey( width ) == false ) {
                 System.out.println( root );
                 map.put( width, root );
 
             }
-            print( root.left, width - 1 );
-            print( root.right, width + 1 );
+            printRight( root.right, width + 1 );
+            printRight( root.left, width - 1 );
+        }
+
+    }
+
+
+    public static void printLeft( Node root, int width )
+    {
+        if ( root == null ) {
+            return;
+        } else {
+            if ( width < 0 && map.containsKey( width ) == false ) {
+                System.out.println( root );
+                map.put( width, root );
+
+            }
+            printLeft( root.left, width - 1 );
+            printLeft( root.right, width + 1 );
         }
 
     }

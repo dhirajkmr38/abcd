@@ -9,13 +9,19 @@ public class Tree1
     Node root;
 
 
-    Node getRoot()
+    public Node getRoot()
     {
-        root = new Node( 1 );
-        root.right = new Node( 2 );
-        root.right.right = new Node( 5 );
-        root.right.right.left = new Node( 3 );
-        root.right.right.left.right = new Node( 4 );
+        //        root = new Node( 20 );
+        //        root.right = new Node( 19 );
+        //        root.left = new Node( 10 );
+        //        root.left.left = new Node( 15 );
+        //        root.left.left.left = new Node( 10 );
+        //        root.left.left.left.right = new Node( 50 );
+        //        root.left.left.left.right.right = new Node( 30 );
+        root = new Node( 21 );
+        root.left = new Node( 57 );
+        root.right = new Node( 12 );
+
         return root;
 
     }
