@@ -5,11 +5,11 @@ public class MyThread extends Thread
     @Override public void run()
     {
         while ( true ) {
-            System.out.println( "Thread Running!" );
-            try {
-                Thread.sleep( 1000 );
-            } catch ( InterruptedException e ) {
-                e.printStackTrace();
+            System.out.println( "HE" );
+
+            if ( Thread.currentThread().isInterrupted() ) {
+                System.out.println( "Interrupted" );
+                break;
             }
         }
     }
