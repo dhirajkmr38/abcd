@@ -33,7 +33,7 @@ public class Tree1
         root.left = new Node( 5 );
         root.right = new Node( 70 );
         root.left.left = new Node( 12 );
-        //   root.left.right = new Node( 18 );
+        root.left.right = new Node( 18 );
 
 
         return root;

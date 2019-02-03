@@ -1,6 +1,6 @@
 package com.practice.pojo;
 
-import java.util.List;
+import java.util.ArrayList;
 
 
 class gfg
@@ -8,8 +8,8 @@ class gfg
     public int recur( Graph g, int src, int des )
     {
 
-        List<Integer> neigbhourList = g.edges[src];
-        for ( int node : neigbhourList ) {
+        ArrayList<Integer> neigbhourArrayList = g.edges[src];
+        for ( int node : neigbhourArrayList ) {
             if ( node == des ) {
                 System.out.println( "Path found" );
                 continue;

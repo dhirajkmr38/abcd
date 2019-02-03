@@ -4,7 +4,7 @@ import com.practice.utils.Tree1;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 
 
@@ -22,9 +22,9 @@ public class VerticalOrder
             return;
 
         else {
-            List<Integer> currentList = (List<Integer>) map.get( disp );
-            if ( currentList == null ) {
-                currentList = new ArrayList<Integer>();
+            ArrayList<Integer> currentArrayList = (ArrayList<Integer>) map.get( disp );
+            if ( currentArrayList == null ) {
+                currentArrayList = new ArrayList<Integer>();
             }
             if ( min > disp ) {
                 min = disp;
@@ -32,8 +32,8 @@ public class VerticalOrder
             if ( max < disp ) {
                 max = disp;
             }
-            currentList.add( node.data );
-            map.put( disp, currentList );
+            currentArrayList.add( node.data );
+            map.put( disp, currentArrayList );
             recur( node.left, disp - 1 );
             recur( node.right, disp + 1 );
         }
@@ -45,11 +45,11 @@ public class VerticalOrder
         min = Integer.MAX_VALUE;
         max = Integer.MIN_VALUE;
 
-        map = new HashMap<Integer, List<Integer>>();
+        map = new HashMap<Integer, ArrayList<Integer>>();
         recur( root, 0 );
         for ( int i = min; i <= max; i++ ) {
-            List<Integer> list = (List<Integer>) map.get( i );
-            for ( int a : list ) {
+            ArrayList<Integer> ArrayList = (ArrayList<Integer>) map.get( i );
+            for ( int a : ArrayList ) {
                 System.out.print( a + " " );
             }
         }

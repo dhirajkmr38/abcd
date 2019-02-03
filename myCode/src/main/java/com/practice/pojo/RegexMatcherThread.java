@@ -1,7 +1,7 @@
 package com.practice.pojo;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.concurrent.Callable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,10 +20,10 @@ public class RegexMatcherThread implements Callable
     }
 
 
-    @Override public List<String> call()
+    @Override public ArrayList<String> call()
     {
         System.out.println( Thread.currentThread().getName() + " " + pattern );
-        List<String> tokens = new ArrayList<String>();
+        ArrayList<String> tokens = new ArrayList<String>();
         Pattern pattern = Pattern.compile( this.pattern );
         Matcher matcher = pattern.matcher( new InterruptibleCharSequence( input ) );
         while ( matcher.find() ) {
